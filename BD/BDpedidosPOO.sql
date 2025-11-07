@@ -1,0 +1,60 @@
+CREATE DATABASE PEDIDOS;
+
+USE PEDIDOS;
+DROP TABLE PEDIDO;
+
+create table PEDIDO (
+NUMERO INT PRIMARY KEY,
+DATA DATE not null,
+PRAZO_ENTREGA DATE,
+RUA varchar(80),
+NR INT,
+BAIRRO varchar(50),
+COMPLEMENTO varchar(100),
+CIDADE varchar(50),
+UF varchar(2),
+CEP varchar(10),
+TOTAL_FATURA float,
+CODIGO_CLI INT not null
+);
+
+create table CLIENTE (
+CODIGO int not null,
+NOME varchar(60) not null,
+RUA varchar(80) not null,
+NR INT not null,
+BAIRRO varchar(50) not null,
+COMPLEMENTO varchar(100),
+CIDADE varchar(50) not null,
+UF varchar(2) not null,
+CEP varchar(10) not null,
+constraint PK_CLIENTE primary key (CODIGO)
+);
+
+create table PRODUTO (
+CODIGO INT not null,
+DESCRICAO varchar(80) not null,
+TIPO varchar(10) not null,
+constraint PK_PRODUTO primary key (CODIGO)
+);
+
+create table ITEM_PRODUTO (
+   CODIGO_PRO           INT                not null,
+   NUMERO_PED           INT             not null,
+   QUANTIDADE           INT(5)             not null,
+   PRECO_UNITARIO       FLOAT(5,2)           not null,
+   VALOR_ITEM           FLOAT(7,2)           not null,
+   constraint PK_ITEM_PRODUTO primary key (CODIGO_PRO, NUMERO_PED)
+);
+
+alter table ITEM_PRODUTO
+   add constraint FK_ITEM_PRODUTO foreign key (CODIGO_PRO)
+      references PRODUTO (CODIGO);
+      
+alter table ITEM_PRODUTO
+   add constraint FK_ITEM_PEDIDO foreign key (CODIGO_PRO)
+      references PEDIDO (NUMERO);
+      
+      alter table PEDIDO
+   add constraint FK_PED_CLIENTE foreign key (CODIGO_CLI)
+      references CLIENTE (CODIGO);
