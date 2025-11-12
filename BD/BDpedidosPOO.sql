@@ -10,12 +10,6 @@ create table PEDIDO (
 NUMERO INT PRIMARY KEY auto_increment,
 DATA DATE not null,
 PRAZO_ENTREGA DATE,
-RUA varchar(80),
-NR INT,
-BAIRRO varchar(50),
-COMPLEMENTO varchar(100),
-CIDADE varchar(50),
-UF varchar(2),
 CEP varchar(10),
 TOTAL_FATURA float,
 CODIGO_CLI INT not null
@@ -24,12 +18,6 @@ CODIGO_CLI INT not null
 create table CLIENTE (
 CODIGO int not null auto_increment,
 NOME varchar(60) not null,
-RUA varchar(80) not null,
-NR INT not null,
-BAIRRO varchar(50) not null,
-COMPLEMENTO varchar(100),
-CIDADE varchar(50) not null,
-UF varchar(2) not null,
 CEP varchar(10) not null,
 constraint PK_CLIENTE primary key (CODIGO)
 );
