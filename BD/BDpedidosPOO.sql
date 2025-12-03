@@ -9,43 +9,41 @@ DROP TABLE ITEM_PRODUTO CASCADE;
 
 create table PEDIDO (
 NUMERO INT PRIMARY KEY auto_increment,
-total_fatura decimal,
+total_fatura decimal,	
 CEP varchar(10),	
-ID_CLI INT not null
+CODIGO_CLI INT not null
 );
 
 create table CLIENTE (
 CODIGO int not null auto_increment,
-NOME varchar(60) not null,
-CEP varchar(10) not null,
+NOME varchar(60),
+CEP varchar(10) ,
 constraint PK_CLIENTE primary key (CODIGO)
 );
 
 create table PRODUTO (
 id INT not null auto_increment,
-DESCRICAO varchar(80) not null,
-TIPO varchar(10) not null,
+DESCRICAO varchar(80),
+TIPO varchar(10) ,
 constraint PK_PRODUTO primary key (id)
 );
 
 create table ITEM_PRODUTO (
-   CODIGO_PRO           INT                not null,
+   id_PRO           INT                not null,
    NUMERO_PED           INT             not null,
-   QUANTIDADE           INT(5)             not null,
-   VALOR_ITEM           FLOAT(7,2)           not null,
-   constraint PK_ITEM_PRODUTO primary key (CODIGO_PRO, NUMERO_PED)
+   constraint PK_ITEM_PRODUTO primary key (id_PRO, NUMERO_PED)
 );
 
 alter table ITEM_PRODUTO
-   add constraint FK_ITEM_PRODUTO foreign key (CODIGO_PRO)
+   add constraint FK_ITEM_PRODUTO foreign key (id_PRO)
       references PRODUTO (ID);
       
 alter table ITEM_PRODUTO
-   add constraint FK_ITEM_PEDIDO foreign key (CODIGO_PRO)
+   add constraint FK_ITEM_PEDIDO foreign key (numero_Ped)
       references PEDIDO (NUMERO);
       
       alter table PEDIDO
-   add constraint FK_PED_CLIENTE foreign key (ID_CLI)
+   add constraint FK_PED_CLIENTE foreign key (codigo_CLI)
       references CLIENTE (CODIGO);
       
       select * from produto;	
